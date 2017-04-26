@@ -8,6 +8,10 @@ class HeroesController < ApplicationController
   end
 
   def all
+    # Marvel API only returns a maximum of 100 results per call
+    # There are 1485 characters
+    # Some results are organizations such as H.Y.D.R.A
+    # Some comics are collections of individual issues
     url = 'https://gateway.marvel.com:443/v1/public/characters?limit=100' + '&ts=' + timestamp + '&apikey=' + ENV["MARVEL_PUBLIC"] + '&hash=' + marvel_hash
     # debugger
     uri = URI(url)
@@ -22,13 +26,7 @@ class HeroesController < ApplicationController
   end
   
   def marvel_hash
-    # time = Time.now.to_i.to_s
     hash = Digest::MD5.hexdigest( timestamp + ENV['MARVEL_PRIVATE'] + ENV['MARVEL_PUBLIC'] )
-    # hash = Digest::MD5.new
-    # hash.update "time"
-    # hash.update ENV['MARVEL_PRIVATE']
-    # hash.update ENV['MARVEL_PUBLIC']
-    # hash.hexdigest
   end
   
 end 
