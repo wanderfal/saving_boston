@@ -8,7 +8,7 @@ class HeroesController < ApplicationController
   end
 
   def all
-    url = 'https://gateway.marvel.com:443/v1/public/characters?orderBy=name' + '&ts=' + timestamp + '&apikey=' + ENV["MARVEL_PUBLIC"] + '&hash=' + marvel_hash
+    url = 'https://gateway.marvel.com:443/v1/public/characters?limit=100' + '&ts=' + timestamp + '&apikey=' + ENV["MARVEL_PUBLIC"] + '&hash=' + marvel_hash
     # debugger
     uri = URI(url)
     response = Net::HTTP.get(uri)
