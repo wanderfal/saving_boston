@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426211718) do
+ActiveRecord::Schema.define(version: 20170427044148) do
 
   create_table "heroes", force: :cascade do |t|
     t.string   "name",                                                                  null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170426211718) do
     t.datetime "updated_at",                                                            null: false
     t.integer  "comics"
     t.integer  "#<ActiveRecord::ConnectionAdapters::TableDefinition:0x00000006ca6ee8>"
+    t.integer  "marvel_id"
   end
 
 end
