@@ -7,7 +7,7 @@ class Heroe < ApplicationRecord
       character_data = marvel_api_call['data']
       if !character_data['results'].empty?
         character_data['results'].each do |hero|
-          character = Heroe.new( :name => hero['name'], :comics => hero['comics']['available'] )
+          character = Heroe.new( :name => hero['name'], :comics => hero['comics']['available'], :marvel_id => hero['id'] )
           character.save
         end
         response_count = character_data['count']
