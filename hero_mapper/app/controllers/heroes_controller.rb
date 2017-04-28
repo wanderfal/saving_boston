@@ -3,7 +3,7 @@ require 'digest/md5'
 class HeroesController < ApplicationController
 
   def index
-    @popular_heroes = Heroe.order(comics: :desc).limit(15)
+    @popular_heroes = Heroe.popular_heroes
     render "heroes"
   end
 

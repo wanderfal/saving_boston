@@ -17,6 +17,11 @@ class Heroe < ApplicationRecord
       
     end
   end
+
+  def self.popular_heroes
+    Heroe.order(comics: :desc).limit(15)
+  end
+  
   
   private
 
