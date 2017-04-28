@@ -1,1 +1,7 @@
-"Hello World!"
+<h1>Most Popular Heroes</h1>
+
+<% @popular_heroes.each do |hero| %>
+  <ul>
+    <li><%= hero.name %></li>
+  </ul>
+<% end %>
