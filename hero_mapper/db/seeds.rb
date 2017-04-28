@@ -1,7 +1,14 @@
 require 'redis'
 
-# GEOADD using Redis
-redis = Redis.new
+def populate_database
+  api_data_total = Heroe.marvel_api_call['data']['total']
+  if api_data_total > Heroe.count
+    Heroe.save_hero_data
+  end
+  puts "Populated Database"
+end
+
+populate_database
 
 # redis.GEOADD
 CITIES = { "NYC" => [40.730610, -73.935242],
@@ -21,27 +28,22 @@ CITIES = { "NYC" => [40.730610, -73.935242],
            "Cleveland" => [41.505493, -81.681290]
           }
 
-def test_call
+# GEOADD using Redis
+
+def cache_heroes
+  redis = Redis.new
   popular_heroes = Heroe.popular_heroes
-  CITIES.each_with_index do | (city, geo), i|
-    debugger
-    puts city + geo + i
+  CITIES.each_with_index do |(city, geo), i|
+    lat = geo[0]
+    long = geo[1]
+    hero = popular_heroes[i]
+    puts hero
+    redis.geoadd(hero.name, long, lat, city)
   end
   
-
 end
 
-test_call
+cache_heroes
 
 
 
-
-def populate_database
-  api_data_total = Heroe.marvel_api_call['data']['total']
-  if api_data_total > Heroe.count
-    Heroe.save_hero_data
-  end
-  puts "Populated Database"
-end
-
-populate_database
