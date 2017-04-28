@@ -5,3 +5,11 @@
     <li><%= hero.name %></li>
   </ul>
 <% end %>
+
+<h1>Magneto is in Boston!</h1>
+<h2>Where are the closest Heroes!?</h2>
+<% @nearby_heroes.each do |hero_name| %>
+  <ul>
+    <li><%= hero_name %> </li>
+  </ul>
+<% end %>
