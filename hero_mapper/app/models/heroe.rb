@@ -22,6 +22,13 @@ class Heroe < ApplicationRecord
     Heroe.order(comics: :desc).limit(15)
   end
   
+  def self.nearby_heroes(city)
+    coord = CITIES[city]
+    lat = coord[0]
+    long = coord[1]
+    redis = Redis.new
+    redis.georadius( 'Marvel', long, lat, 500, 'mi', 'asc' )
+  end
   
   private
 
