@@ -30,20 +30,30 @@ CITIES = { "NYC" => [40.730610, -73.935242],
 
 # GEOADD using Redis
 
-def cache_heroes
+def add_hero_locations
   redis = Redis.new
   popular_heroes = Heroe.popular_heroes
   CITIES.each_with_index do |(city, geo), i|
     lat = geo[0]
     long = geo[1]
     hero = popular_heroes[i]
-    puts hero
-    redis.geoadd(hero.name, long, lat, city)
+    redis.geoadd('Marvel', long, lat, hero.name)
   end
-  
+  puts "Finished populating cities with Hero."
 end
 
-cache_heroes
+add_hero_locations
 
+# def nearby_heroes(city)
+#   lat = city[0]
+#   long = city[1]
+#   redis = Redis.new
+#   redis.geoadd(
+#     "Marvel",long,lat,"Magneto",
+#     stringify_locations
+#   )
+# end
 
+# p CITIES['Boston']
+# nearby_heroes(CITIES['Boston'])
 
